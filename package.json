@@ -4,13 +4,25 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "#---ビルド、本番環境---": "",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --dir src",
-    "format": "next lint --fix --dir src",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "test": "jest"
+    "export": "next export",
+    "#---Linter/Formatter---": "",
+    "lint": "eslint ./src/**/*.{ts,tsx,js} ./functions/src/**/*.{ts,tsx,js} -c ./format/.eslintrc.json",
+    "format": "eslint ./src/**/*.{ts,tsx,js} ./functions/src/**/*.{ts,tsx,js} --fix -c ./format/.eslintrc.json",
+    "prettier-watch": "onchange \"./src/**/*\" \"./functions/src/**/*\" --exclude-path ./format/.prettierignore -- prettier --config ./format/.prettierrc.json --write --ignore-unknown {{changed}}",
+    "prepare": "husky install",
+    "#---サブツール---": "",
+    "test": "jest --env=jsdom --verbose",
+    "storybook": "start-storybook -h 0.0.0.0 -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "lint-staged": {
+    "*.@(ts|tsx)": [
+      "yarn lint",
+      "yarn format"
+    ]
   },
   "dependencies": {
     "next": "12.2.4",
@@ -44,6 +56,7 @@
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "babel-loader": "^8.2.5",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.21.0",
     "eslint-config-next": "12.2.4",
     "eslint-config-prettier": "^8.5.0",
@@ -52,9 +65,12 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.4",
+    "husky": "^8.0.1",
     "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
     "jest-fetch-mock": "^3.0.3",
+    "lint-staged": "^13.0.3",
+    "onchange": "^7.1.0",
     "prettier": "^2.7.1",
     "tsconfig-paths-webpack-plugin": "^4.0.0",
     "typescript": "4.7.4",

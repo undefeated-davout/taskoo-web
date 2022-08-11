@@ -1,6 +1,5 @@
 import { addDecorator } from '@storybook/react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { theme } from '../src/themes'
 import * as NextImage from 'next/image'
 
 export const parameters = {
@@ -15,30 +14,32 @@ export const parameters = {
 
 export const GlobalStyle = createGlobalStyle`
   html,
-  body,
-  textarea {
+  body {
     padding: 0;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   * {
     box-sizing: border-box;
   }
-  a {
-    text-decoration: none;
-    transition: .25s;
-    color: #000000;
+
+  @media (prefers-color-scheme: dark) {
+    html {
+      color-scheme: dark;
+    }
+    body {
+      color: white;
+      background: black;
+    }
   }
 `
-
-// Themeの適用
-addDecorator((story) => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    {story()}
-  </ThemeProvider>
-))
 
 // next/imageの差し替え
 const OriginalNextImage = NextImage.default;
