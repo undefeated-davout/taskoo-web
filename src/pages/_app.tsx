@@ -1,7 +1,7 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
+import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { theme } from 'themes';
 
 // グローバルのスタイル
 const GlobalStyle = createGlobalStyle`
@@ -13,20 +13,24 @@ textarea {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
+
 * {
   box-sizing: border-box;
 }
+
 a {
   cursor: pointer;
   text-decoration: none;
   transition: .25s;
+  color: ${theme.colors.black};
 }
+
 ol, ul {
   list-style: none;
 }
 `;
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
@@ -40,9 +44,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:type" content="website" />
       </Head>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
-}
+};
 
 export default MyApp;
