@@ -30,6 +30,6 @@ services:
       - 9199:9199
       - 9229:9229
     volumes:
-      - ./_shared_storage/firebase:/opt/app/src/_shared_storage/firebase
+      - ./_shared_storage:/opt/app/src/_shared_storage
       - ./infrastructure/firebase:/opt/app/src/infrastructure/firebase
       - ./scripts:/opt/app/src/scripts
