@@ -14,8 +14,8 @@
     "prettier-watch": "onchange \"./src/**/*\" \"./functions/src/**/*\" --exclude-path ./format/.prettierignore -- prettier --config ./format/.prettierrc.json --write --ignore-unknown {{changed}}",
     "prepare": "husky install",
     "#---サブツール---": "",
-    "test": "jest --env=jsdom --verbose",
-    "storybook": "start-storybook -h 0.0.0.0 -p 6006",
+    "test": "jest --config=./jest/jest.config.js",
+    "storybook": "start-storybook -h 0.0.0.0 -p 6006 --quiet",
     "build-storybook": "build-storybook"
   },
   "lint-staged": {

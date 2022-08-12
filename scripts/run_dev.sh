@@ -10,7 +10,7 @@ yarn prettier-watch &
 echo 'Firebase Emulator Suite起動（常駐）'
 firebase emulators:start --config ./infrastructure/firebase/firebase.json &
 
-echo 'StoryBook起動（常駐）'
+echo 'Storybook起動（常駐）'
 yarn storybook &
 
 echo 'Webサーバ起動（開発）'
